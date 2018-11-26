@@ -183,7 +183,7 @@ static struct gsl_ts_data *proc_ddata = NULL;
 static DECLARE_WAIT_QUEUE_HEAD(waiter);
 static struct task_struct *thread = NULL;
 static int tpd_flag = 0;
-#define GSL_DEBUG 
+
 #ifdef GSL_DEBUG 
 #define print_info(fmt, args...)   \
 		do{                              \
@@ -643,7 +643,7 @@ static ssize_t gsl_config_read_proc(struct file *file, char *buffer, size_t coun
 	if('v'==gsl_read[0]&&'s'==gsl_read[1])
 	{
 #ifdef GSL_ALG_ID
-//		tmp=gsl_version_id();
+//		tmp=gsl_version_id();   hyperion70
 		tmp=0x20150706;
 #else 
 
@@ -1675,7 +1675,7 @@ Return Value : static
 static int gsl_detect (struct i2c_client *client, struct i2c_board_info *info)
 {
      strcpy(info->type, TPD_DEVICE);
-     strcpy(info->type, "mtk-tpd");
+     //strcpy(info->type, "mtk-tpd");
      return 0;
 }
 

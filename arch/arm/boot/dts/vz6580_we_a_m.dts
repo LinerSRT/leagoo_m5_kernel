@@ -342,7 +342,7 @@ chosen {
 /* TOUCH GPIO standardization */
 &touch {
 	tpd-resolution = <720 1280>;
-	use-tpd-button = <0>;
+	use-tpd-button = <1>;
 	tpd-key-num = <3>;
 	tpd-key-local= <139 172 158 0>;
 	tpd-key-dim-local = <90 883 100 40 230 883 100 40 370 883 100 40 0 0 0 0>;
@@ -387,14 +387,14 @@ chosen {
 	};
 	ctp_pins_rst_output0: rstoutput0 {
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO8__FUNC_GPIO8>;
+			pins = <PINMUX_GPIO2__FUNC_GPIO2>;
 			slew-rate = <1>;
 			output-low;
 		};
 	};
 	ctp_pins_rst_output1: rstoutput1 {
 		pins_cmd_dat {
-			pins = <PINMUX_GPIO8__FUNC_GPIO8>;
+			pins = <PINMUX_GPIO2__FUNC_GPIO2>;
 			slew-rate = <1>;
 			output-high;
 		};

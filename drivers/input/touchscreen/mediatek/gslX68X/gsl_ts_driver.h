@@ -56,3 +56,26 @@ extern unsigned int gsl_version_id(void);
 extern void gsl_alg_id_main(struct gsl_touch_info *cinfo);
 extern void gsl_DataInit(int *ret);
 #endif
+
+/* Fixme mem Alig */
+#ifdef LYCONFIG_COMB_CUST_PROJECT_NAME_FACTORY
+#include "gsl_ts_fw_qhd_factory.h"
+#else
+#include "gsl_ts_fw.h"
+#endif
+
+static unsigned char gsl_cfg_index = 0;
+
+struct fw_config_type
+{
+	const struct fw_data *fw;
+	unsigned int fw_size;
+	unsigned int *data_id;
+	unsigned int data_size;
+};
+static struct fw_config_type gsl_cfg_table[9] = {
+/*0*/{GSLX680_FW,(sizeof(GSLX680_FW)/sizeof(struct fw_data)),
+	gsl_config_data_id,(sizeof(gsl_config_data_id)/4)},
+};
+
+#endif
