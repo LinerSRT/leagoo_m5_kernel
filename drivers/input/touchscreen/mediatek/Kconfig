@@ -21,6 +21,19 @@ config TOUCHSCREEN_MTK
 	  To compile this dirver as a module, choose M here: the
 	  module will be called.
 
+config TOUCHSCREEN_MTK_GSLX68X
+       bool "MTK_GSLX68X for Mediatek package"
+       default n
+       help
+         Say Y here if you have MTK_GSLX68X touch panel.
+
+         If unsure, say N.
+
+         To compile this dirver as a module, choose M here: the
+         module will be called.
+
+source "drivers/input/touchscreen/mediatek/gslX68X/Kconfig"
+
 config TOUCHSCREEN_MTK_GT1151
 	bool "GT1151 for Mediatek package"
 	default n
