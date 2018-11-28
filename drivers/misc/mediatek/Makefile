@@ -167,6 +167,7 @@ endif
 obj-$(CONFIG_MTK_BTCVSD) += btcvsd/
 obj-$(CONFIG_MTK_MTD_NAND) += nand/
 obj-$(CONFIG_MTK_DUM_CHAR) += dum-char/
+obj-$(CONFIG_KERNEL_HALL) += hall/
 obj-$(CONFIG_MTK_DYNAMIC_BOOST) += dynamic_boost/
 
 obj-$(CONFIG_MTK_RRC)	+= rrc/
