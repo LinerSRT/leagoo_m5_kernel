@@ -937,7 +937,7 @@ static int tpd_ps_operate(void* self, uint32_t command, void* buff_in, int size_
 	}
 
 	return err;
-
+ 
 }
 #endif
 #ifdef GSL_GESTURE
@@ -1478,7 +1478,7 @@ static int tpd_irq_registration(void)
 
 		touch_irq = irq_of_parse_and_map(node, 0);
 		
-		print_info("Device gt1x_int_type = %d!", int_type);
+		printk("[gsl] Device gt1x_int_type = %d!", int_type);
 		
 		if (!int_type) {/*EINTF_TRIGGER*/
 			ret =      
@@ -1523,8 +1523,8 @@ static int  gsl_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	proc_ddata = ddata;
 	mutex_init(&gsl_i2c_lock);
 	ddata->client = client;
-	ddata->client->addr = 0x40;
-	print_info("ddata->client->addr = 0x%x \n",ddata->client->addr);
+	ddata->client->addr = 0x48;
+	printk("ddata->client->addr = 0x%x \n",ddata->client->addr);
 	gsl_hw_init();
 
 	//mt_eint_mask(CUST_EINT_TOUCH_PANEL_NUM);
@@ -1554,7 +1554,7 @@ static int  gsl_probe(struct i2c_client *client, const struct i2c_device_id *id)
 	thread = kthread_run(touch_event_handler, 0, TPD_DEVICE);
 	if (IS_ERR(thread)) {
 		//err = PTR_ERR(thread);
-		//TPD_DMESG(TPD_DEVICE " failed to create kernel thread: %d\n", PTR_ERR(thread));
+		TPD_DMESG(TPD_DEVICE " failed to create kernel thread: %d\n", PTR_ERR(thread));
 	}
   
 
@@ -1636,7 +1636,7 @@ static int  gsl_probe(struct i2c_client *client, const struct i2c_device_id *id)
 
 	enable_irq(touch_irq);
 	
-	tpd_load_status = 1;
+	//tpd_load_status = 1;
 
 	return 0;
 
@@ -1679,8 +1679,8 @@ static int gsl_detect (struct i2c_client *client, struct i2c_board_info *info)
      return 0;
 }
 
-static const struct i2c_device_id gsl_device_id[] = {{GSL_DEV_NAME,0},{}};
-static unsigned short force[] = {0,0x80,I2C_CLIENT_END,I2C_CLIENT_END};
+static const struct i2c_device_id gsl_device_id[] = {{GSL_DEV_NAME,1},{}};
+static unsigned short force[] = {1,0x5d,I2C_CLIENT_END,I2C_CLIENT_END};
 static const unsigned short * const forces[] = { force, NULL };
 
 //static struct i2c_client_address_data addr_data = { .forces = forces,};
@@ -1745,8 +1745,9 @@ static int gsl_local_init(void)
 	{
 		print_info("tpd_load_status == 0, gsl_probe failed\n");
 		i2c_del_driver(&gsl_i2c_driver);
+		printk("GSL LOAD DRIVER ERROR");
 		return -ENODEV;
-		print_info("GSL LOAD DRIVER ERROR");
+		
 	}
 
 	/* define in tpd_debug.h */
@@ -1759,7 +1760,7 @@ static void gsl_suspend(struct device *h)
 {
 	int tmp;
 	print_info();
-	//printk("gsl_suspend:gsl_ps_enable = %d\n",gsl_ps_enable);	
+	printk("gsl_suspend:gsl_ps_enable = %d\n",gsl_ps_enable);	
 #ifdef TPD_PROXIMITY
 	if (tpd_proximity_flag == 1)
 	{
@@ -1795,7 +1796,7 @@ static void gsl_suspend(struct device *h)
 
 	disable_irq(touch_irq);
 	//gsl_reset_core(ddata->client);
-	//msleep(20);
+	msleep(10);
 	GTP_GPIO_OUTPUT(GTP_RST_PORT, 0);
 }
 
