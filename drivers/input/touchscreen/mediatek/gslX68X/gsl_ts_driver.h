@@ -12,7 +12,7 @@
 #if defined(LYCONFIG_FEA_TP_WAKEUP_SUPPORT)
 #define GSL_GESTURE
 #endif
-#define GSL9XX_VDDIO_1800		1
+#define GSL9XX_VDDIO_1800		0
 #define TPD_DEBUG_TIME	0x20130424
 struct gsl_touch_info
 {
